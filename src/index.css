@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --color-ov-navy: #0b1a2e;
+  --color-ov-navy-light: #132744;
+  --color-ov-blue: #1a4f8b;
+  --color-ov-blue-light: #2768ab;
+  --color-ov-accent: #3d7ec7;
+  --color-ov-slate: #5a6a7e;
+  --color-ov-muted: #f1f4f8;
+  --color-ov-canvas: #f8f9fb;
+  --color-ov-border: #e4e8ee;
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply m-0 min-h-svh bg-white font-sans text-ov-slate antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  ::selection {
+    @apply bg-ov-blue/12 text-ov-navy;
+  }
+}
+
+@utility shadow-ov-sm {
+  box-shadow:
+    0 1px 2px rgba(11, 26, 46, 0.03),
+    0 2px 6px rgba(11, 26, 46, 0.04);
+}
+@utility shadow-ov-md {
+  box-shadow:
+    0 2px 4px rgba(11, 26, 46, 0.03),
+    0 6px 20px rgba(11, 26, 46, 0.06);
+}
+@utility shadow-ov-lg {
+  box-shadow:
+    0 4px 8px rgba(11, 26, 46, 0.04),
+    0 12px 32px rgba(11, 26, 46, 0.08);
+}
+
+@utility animation-delay-100 {
+  animation-delay: 100ms;
+}
+@utility animation-delay-200 {
+  animation-delay: 200ms;
+}
+@utility animation-delay-300 {
+  animation-delay: 300ms;
+}
+@utility animation-delay-400 {
+  animation-delay: 400ms;
+}
+@utility animation-delay-500 {
+  animation-delay: 500ms;
+}
+@utility animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.opacity-0-animate {
+  opacity: 0;
+}
