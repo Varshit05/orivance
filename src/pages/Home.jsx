@@ -43,7 +43,7 @@ export default function Home() {
           </h1>
           <p className="opacity-0-animate animate-fade-in-up animation-delay-200 mt-8 max-w-lg text-base leading-relaxed text-slate-300">
             We partner with businesses to simplify complex legal and regulatory
-            landscapes — with clarity, resilience, and confidence.
+            landscapes, with clarity, resilience, and confidence.
           </p>
           <div className="opacity-0-animate animate-fade-in-up animation-delay-300 mt-10 flex flex-wrap gap-4">
             <Button
@@ -51,13 +51,6 @@ export default function Home() {
               className="bg-white! text-ov-navy! hover:bg-slate-100!"
             >
               Book a Consultation
-            </Button>
-            <Button
-              to="/services"
-              variant="secondary"
-              className="border-white/20! bg-transparent! text-white! shadow-none! hover:border-white/40! hover:bg-white/10! hover:text-white! hover:shadow-none!"
-            >
-              Explore Services
             </Button>
           </div>
         </div>
@@ -87,7 +80,7 @@ export default function Home() {
       </div>
 
       {/* Services — overview */}
-      <section className="bg-white py-24 sm:py-32">
+      <section id="services" className="scroll-mt-24 bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-12">
             <div className="lg:col-span-4">
@@ -99,7 +92,7 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-ov-slate">
                 We deliver structured legal and regulatory solutions across five
-                core practice areas — each designed to move your business
+                core practice areas, each designed to move your business
                 forward with clarity and confidence.
               </p>
               <div className="mt-8">

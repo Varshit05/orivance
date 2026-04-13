@@ -1,10 +1,6 @@
-import Button from '../components/Button'
-import {
-  SERVICES,
-  SERVICES_PAGE_INTRO,
-  SERVICES_NAME_NOTE,
-  EXPECTED_OUTCOME,
-} from '../content/ovCopy'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { SERVICES, SERVICES_PAGE_INTRO } from '../content/ovCopy'
 import serviceRegulatoryImage from '../assets/services-1.jpg'
 import serviceBusinessImage from '../assets/services-2.jpg'
 import serviceContractImage from '../assets/services-3.jpg'
@@ -27,11 +23,11 @@ function ServiceBlock({ id, title, summary, imageLeft, image, index }) {
   )
 
   const visual = (
-    <div className="relative overflow-hidden rounded-lg">
+    <div className="group relative overflow-hidden rounded-lg shadow-sm ring-1 ring-ov-border/25 transition-shadow duration-300 hover:shadow-lg hover:ring-ov-border/40">
       <img
         src={image}
         alt=""
-        className="aspect-4/3 w-full object-cover"
+        className="aspect-4/3 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.045]"
         loading="lazy"
       />
     </div>
@@ -77,6 +73,25 @@ const serviceData = SERVICES.map((s, i) => ({
 }))
 
 export default function Services() {
+  const { pathname, hash } = useLocation()
+
+  useEffect(() => {
+    if (!hash || pathname !== '/services') return
+    const id = hash.replace(/^#/, '')
+    if (!id) return
+
+    const scrollToTarget = () => {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+
+    scrollToTarget()
+    const t = window.setTimeout(scrollToTarget, 50)
+    return () => window.clearTimeout(t)
+  }, [pathname, hash])
+
   return (
     <>
       {/* Hero */}
@@ -92,9 +107,6 @@ export default function Services() {
             <p className="mt-6 text-base leading-relaxed text-ov-slate">
               {SERVICES_PAGE_INTRO}
             </p>
-            {/* <p className="mt-4 text-sm font-medium text-ov-navy">
-              {SERVICES_NAME_NOTE}
-            </p> */}
           </div>
 
         </div>
@@ -111,27 +123,6 @@ export default function Services() {
           <ServiceBlock key={s.id} {...s} />
         ))}
       </div>
-
-      {/* CTA */}
-      <section className="border-t border-ov-border/60 bg-ov-navy py-24 sm:py-28">
-        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="font-display text-3xl text-white sm:text-[2.5rem] sm:leading-[1.15]">
-            Partner with OriVance
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-slate-400">
-            {EXPECTED_OUTCOME}
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button
-              to="/"
-              variant="secondary"
-              className="border-white/15! text-white! hover:border-white/30! hover:text-white!"
-            >
-              Home
-            </Button>
-          </div>
-        </div>
-      </section>
     </>
   )
 }

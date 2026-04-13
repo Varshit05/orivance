@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Button from '../components/Button'
-import { EXPECTED_OUTCOME } from '../content/ovCopy'
+import { CONTACT_PAGE_INTRO } from '../content/ovCopy'
 
 const initial = { name: '', email: '', company: '', message: '' }
 
@@ -19,7 +19,7 @@ export default function Contact() {
   }
 
   const inputCls =
-    'mt-2 w-full border-b border-ov-border bg-transparent px-0 py-3 text-sm text-ov-navy transition-colors duration-200 placeholder:text-slate-400 focus:border-ov-navy focus:outline-none'
+    'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Contact() {
               Contact Us
             </h1>
             <p className="mt-6 text-base leading-relaxed text-ov-slate">
-              {EXPECTED_OUTCOME}
+              {CONTACT_PAGE_INTRO}
             </p>
           </div>
         </div>
@@ -46,102 +46,113 @@ export default function Contact() {
       </div>
 
       {/* Form + details */}
-      <section className="bg-white py-20 sm:py-24">
+      <section className="bg-ov-muted py-20 sm:py-24">
         <div className="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-12 lg:gap-20 lg:px-8">
           <div className="lg:col-span-7">
-            {submitted ? (
-              <div className="py-12">
-                <p className="font-display text-2xl text-ov-navy">
-                  Thank you for reaching out.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ov-slate">
-                  We have received your message and will respond within one
-                  business day.
-                </p>
+            <div className="overflow-hidden rounded-2xl border border-ov-border/90 bg-white shadow-ov-lg ring-1 ring-ov-navy/4">
+              <div
+                className="h-1 bg-linear-to-r from-ov-blue via-ov-blue-light to-ov-accent"
+                aria-hidden
+              />
+              <div className="p-8 sm:p-10 lg:p-11">
+                {submitted ? (
+                  <div className="py-2">
+                    <p className="font-display text-2xl text-ov-navy">
+                      Thank you for reaching out.
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-ov-slate">
+                      We have received your message and will respond within one
+                      business day.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit}>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-ov-blue">
+                      Write to us
+                    </p>
+                    <p className="mt-3 font-display text-2xl text-ov-navy sm:text-[1.75rem]">
+                      Send us a message
+                    </p>
+                    <p className="mt-2 text-sm text-ov-slate">
+                      We typically respond within 24 hours.
+                    </p>
+                    <div className="mt-10 grid gap-6 sm:grid-cols-2 sm:gap-8">
+                      <div className="sm:col-span-2">
+                        <label
+                          htmlFor="name"
+                          className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
+                        >
+                          Full Name
+                        </label>
+                        <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          required
+                          value={form.name}
+                          onChange={handleChange}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          required
+                          value={form.email}
+                          onChange={handleChange}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="company"
+                          className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
+                        >
+                          Company
+                        </label>
+                        <input
+                          id="company"
+                          name="company"
+                          type="text"
+                          required
+                          value={form.company}
+                          onChange={handleChange}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label
+                          htmlFor="message"
+                          className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
+                        >
+                          Message
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          required
+                          rows={5}
+                          value={form.message}
+                          onChange={handleChange}
+                          className={`${inputCls} resize-y`}
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-10">
+                      <Button type="submit">Send Message</Button>
+                    </div>
+                  </form>
+                )}
               </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <p className="font-display text-2xl text-ov-navy">
-                  Send us a message
-                </p>
-                <p className="mt-2 text-sm text-ov-slate">
-                  We typically respond within 24 hours.
-                </p>
-                <div className="mt-12 grid gap-8 sm:grid-cols-2">
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="name"
-                      className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
-                    >
-                      Full Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={form.name}
-                      onChange={handleChange}
-                      className={inputCls}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
-                    >
-                      Email Address
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={handleChange}
-                      className={inputCls}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="company"
-                      className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
-                    >
-                      Company
-                    </label>
-                    <input
-                      id="company"
-                      name="company"
-                      type="text"
-                      required
-                      value={form.company}
-                      onChange={handleChange}
-                      className={inputCls}
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="message"
-                      className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ov-slate"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={5}
-                      value={form.message}
-                      onChange={handleChange}
-                      className={`${inputCls} resize-y`}
-                    />
-                  </div>
-                </div>
-                <div className="mt-10">
-                  <Button type="submit">Send Message</Button>
-                </div>
-              </form>
-            )}
+            </div>
           </div>
 
           <div className="lg:col-span-5">

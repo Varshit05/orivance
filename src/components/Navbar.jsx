@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Button from './Button'
+import ovLogo from '../assets/Ov.jpeg'
 
 const linkClass = ({ isActive }) =>
   `text-[0.8125rem] font-medium transition-colors duration-200 ${
@@ -43,15 +44,18 @@ export default function Navbar() {
         <nav className="flex items-center justify-between border-b border-ov-border/60 py-4">
           <NavLink
             to="/"
-            className="group flex items-baseline gap-1 transition-opacity duration-200 hover:opacity-80"
+            className="group flex items-center gap-2 sm:gap-3 transition-opacity duration-200 hover:opacity-80"
             onClick={() => setOpen(false)}
           >
-            <span className="font-display text-[1.35rem] text-ov-navy">
+            <img
+              src={ovLogo}
+              alt="OriVance"
+              className="h-9 w-auto sm:h-11"
+              decoding="async"
+            />
+            {/* <span className="hidden text-[0.6rem] font-medium uppercase tracking-[0.15em] text-ov-slate sm:inline">
               OriVance
-            </span>
-            <span className="hidden text-[0.6rem] font-medium uppercase tracking-[0.15em] text-ov-slate sm:inline">
-              Global Consulting
-            </span>
+            </span> */}
           </NavLink>
 
           <ul className="hidden items-center gap-8 md:flex">
