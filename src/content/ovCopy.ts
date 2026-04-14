@@ -3,12 +3,15 @@
 export const MISSION_STATEMENT =
   'At OriVance, we partner with businesses to simplify complex legal and regulatory landscapes. Our mission is to enable organizations to operate with clarity, resilience, and confidence by integrating legal intelligence into everyday business decisions.'
 
+export const MISSION_TAGLINE =
+  'Clarity, resilience, and confidence in every decision.'
+
 export const INDUSTRIES_HEADING = 'Industries'
 
 export const INDUSTRIES_INTRO =
   'We work with organizations across sectors that depend on strong legal governance, structured compliance, and reliable operational legal support.'
 
-export const INDUSTRIES = [
+export const INDUSTRIES: readonly string[] = [
   'Technology & SaaS',
   'Supply Chain, Product and Manufacturing',
   'Global Capability Centres (GCCs)',
@@ -17,7 +20,13 @@ export const INDUSTRIES = [
   'E-Commerce & Digital Platforms',
 ]
 
-export const SERVICES = [
+export interface Service {
+  id: string
+  title: string
+  summary: string
+}
+
+export const SERVICES: readonly Service[] = [
   {
     id: 'regulatory-resilience',
     title: 'Regulatory Resilience Shield',
@@ -50,7 +59,7 @@ export const SERVICES = [
   },
 ]
 
-export const ABOUT_PARAGRAPHS = [
+export const ABOUT_PARAGRAPHS: readonly string[] = [
   'OriVance Global Consulting Pvt. Ltd. is a modern advisory firm focused on helping organizations navigate complex legal, regulatory, and operational environments with clarity and confidence.',
   "In today's fast-evolving business landscape, legal and compliance functions are no longer confined to risk management alone they play a critical role in enabling sustainable growth, operational resilience, and strategic decision-making. OriVance was founded with the vision of bridging the gap between legal expertise and business execution, enabling organizations to transform legal complexity into structured, practical, and scalable solutions.",
   'Our approach combines legal intelligence, operational insight, and structured governance frameworks to help businesses strengthen compliance, streamline legal processes, and build resilient operational models. We work closely with organizations to integrate legal strategy into their day-to-day business functions, ensuring that regulatory compliance and operational efficiency evolve together.',

@@ -1,19 +1,26 @@
-import { useState } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 import Button from '../components/Button'
 import { CONTACT_PAGE_INTRO } from '../content/ovCopy'
 
-const initial = { name: '', email: '', company: '', message: '' }
+type ContactForm = {
+  name: string
+  email: string
+  company: string
+  message: string
+}
+
+const initial: ContactForm = { name: '', email: '', company: '', message: '' }
 
 export default function Contact() {
-  const [form, setForm] = useState(initial)
+  const [form, setForm] = useState<ContactForm>(initial)
   const [submitted, setSubmitted] = useState(false)
 
-  function handleChange(e) {
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target
     setForm((f) => ({ ...f, [name]: value }))
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setSubmitted(true)
   }
@@ -27,7 +34,7 @@ export default function Contact() {
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
               Get in Touch
             </p>
             <h1 className="mt-4 font-display text-[2.5rem] leading-[1.1] text-ov-navy sm:text-5xl">
@@ -67,7 +74,7 @@ export default function Contact() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-ov-blue">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-blue">
                       Write to us
                     </p>
                     <p className="mt-3 font-display text-2xl text-ov-navy sm:text-[1.75rem]">
@@ -157,7 +164,7 @@ export default function Contact() {
 
           <div className="lg:col-span-5">
             <div className="sticky top-28 lg:pl-12 lg:border-l lg:border-ov-border/60">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
                 Contact Details
               </p>
               <p className="mt-5 font-display text-xl text-ov-navy">
@@ -170,29 +177,29 @@ export default function Contact() {
 
               <div className="mt-10 space-y-8">
                 <div>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-ov-slate/50">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Email
                   </p>
                   <a
-                    href="mailto:hello@orivance.com"
+                    href="mailto:support@orivancegc.com"
                     className="mt-1.5 block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
                   >
-                    hello@orivance.com
+                    support@orivancegc.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-ov-slate/50">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Phone
                   </p>
                   <a
-                    href="tel:+911800000000"
+                    href="tel:+917219504950"
                     className="mt-1.5 block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
                   >
-                    +91 1800 000 0000
+                    +91 7219504950
                   </a>
                 </div>
                 <div>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-ov-slate/50">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Business Hours
                   </p>
                   <p className="mt-1.5 text-sm text-ov-navy">

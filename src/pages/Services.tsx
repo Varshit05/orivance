@@ -1,13 +1,22 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { SERVICES, SERVICES_PAGE_INTRO } from '../content/ovCopy'
+import { type Service, SERVICES, SERVICES_PAGE_INTRO } from '../content/ovCopy'
 import serviceRegulatoryImage from '../assets/services-1.jpg'
 import serviceBusinessImage from '../assets/services-2.jpg'
 import serviceContractImage from '../assets/services-3.jpg'
 import serviceKnowledgeImage from '../assets/services-4.jpg'
 import serviceLegalOpsImage from '../assets/services-5.jpg'
 
-function ServiceBlock({ id, title, summary, imageLeft, image, index }) {
+interface ServiceBlockProps {
+  id: string
+  title: string
+  summary: string
+  imageLeft: boolean
+  image: string
+  index: number
+}
+
+function ServiceBlock({ id, title, summary, imageLeft, image, index }: ServiceBlockProps) {
   const number = String(index + 1).padStart(2, '0')
 
   const text = (
@@ -63,12 +72,18 @@ const images = [
   serviceContractImage,
   serviceKnowledgeImage,
   serviceLegalOpsImage,
-]
+] as const
 
-const serviceData = SERVICES.map((s, i) => ({
+type ServiceWithLayout = Service & {
+  imageLeft: boolean
+  image: string
+  index: number
+}
+
+const serviceData: ServiceWithLayout[] = SERVICES.map((s, i) => ({
   ...s,
   imageLeft: i % 2 === 0,
-  image: images[i],
+  image: images[i]!,
   index: i,
 }))
 
@@ -98,7 +113,7 @@ export default function Services() {
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
               What We Offer
             </p>
             <h1 className="mt-4 font-display text-[2.5rem] leading-[1.1] text-ov-navy sm:text-5xl">

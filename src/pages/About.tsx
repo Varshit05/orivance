@@ -7,7 +7,7 @@ const values = [
   { title: 'Integrity', description: 'Transparent, ethical advisory grounded in trust.' },
   { title: 'Partnership', description: 'Deep collaboration aligned with your business goals.' },
   { title: 'Innovation', description: 'Modern frameworks bridging legal expertise and technology.' },
-]
+] as const
 
 export default function About() {
   return (
@@ -17,7 +17,7 @@ export default function About() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
                 About OriVance
               </p>
               <h1 className="mt-4 font-display text-[2.5rem] leading-[1.1] text-ov-navy sm:text-5xl">
@@ -49,7 +49,7 @@ export default function About() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
                 Our Values
               </p>
               <h2 className="mt-4 font-display text-3xl text-ov-navy sm:text-4xl">
@@ -83,7 +83,7 @@ export default function About() {
       {/* Narrative */}
       <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-ov-blue">
+          <p className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
             Our Story
           </p>
           <h2 className="mt-4 text-center font-display text-3xl text-ov-navy">
@@ -102,7 +102,6 @@ export default function About() {
         </div>
       </section>
 
-    
     </>
   )
 }

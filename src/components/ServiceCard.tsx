@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom'
 
+export interface ServiceCardProps {
+  title: string
+  description?: string
+  to?: string
+  delayClass?: string
+  dense?: boolean
+}
+
 export default function ServiceCard({
   title,
   description,
   to = '/services',
   delayClass = '',
   dense = false,
-}) {
+}: ServiceCardProps) {
   return (
     <Link to={to} className={`group block ${delayClass}`}>
       <article

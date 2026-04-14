@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, type NavLinkProps } from 'react-router-dom'
 import Button from './Button'
 import ovLogo from '../assets/Ov.jpeg'
 
-const linkClass = ({ isActive }) =>
-  `text-[0.8125rem] font-medium transition-colors duration-200 ${
+const linkClass: NavLinkProps['className'] = ({ isActive }) =>
+  `text-base font-medium transition-colors duration-200 ${
     isActive
       ? 'text-ov-navy'
       : 'text-ov-slate hover:text-ov-navy'
   }`
 
-const mobileLinkClass = ({ isActive }) =>
-  `block py-3 text-sm font-medium transition-colors duration-200 ${
+const mobileLinkClass: NavLinkProps['className'] = ({ isActive }) =>
+  `block py-3 text-base font-medium transition-colors duration-200 ${
     isActive
       ? 'text-ov-navy'
       : 'text-ov-slate hover:text-ov-navy'
@@ -22,7 +22,7 @@ const navItems = [
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
   { to: '/contact', label: 'Contact' },
-]
+] as const
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -53,9 +53,6 @@ export default function Navbar() {
               className="h-9 w-auto sm:h-11"
               decoding="async"
             />
-            {/* <span className="hidden text-[0.6rem] font-medium uppercase tracking-[0.15em] text-ov-slate sm:inline">
-              OriVance
-            </span> */}
           </NavLink>
 
           <ul className="hidden items-center gap-8 md:flex">
@@ -69,7 +66,7 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:block">
-            <Button to="/contact" className="text-xs tracking-[0.08em]">
+            <Button to="/contact" className="text-sm tracking-[0.08em]">
               Get in Touch
             </Button>
           </div>
@@ -114,7 +111,7 @@ export default function Navbar() {
           <div className="mt-4">
             <Button
               to="/contact"
-              className="w-full text-xs tracking-[0.08em]"
+              className="w-full text-sm tracking-[0.08em]"
               onClick={() => setOpen(false)}
             >
               Get in Touch
