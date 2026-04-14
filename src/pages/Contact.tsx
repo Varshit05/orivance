@@ -31,7 +31,7 @@ export default function Contact() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-10 sm:py-14">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
@@ -53,9 +53,9 @@ export default function Contact() {
       </div>
 
       {/* Form + details */}
-      <section className="bg-ov-muted py-20 sm:py-24">
+      <section className="bg-ov-muted pt-6 pb-16 sm:pt-8 sm:pb-20">
         <div className="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-12 lg:gap-20 lg:px-8">
-          <div className="lg:col-span-7">
+          {/* <div className="lg:col-span-7">
             <div className="overflow-hidden rounded-2xl border border-ov-border/90 bg-white shadow-ov-lg ring-1 ring-ov-navy/4">
               <div
                 className="h-1 bg-linear-to-r from-ov-blue via-ov-blue-light to-ov-accent"
@@ -160,10 +160,10 @@ export default function Contact() {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="lg:col-span-5">
-            <div className="sticky top-28 lg:pl-12 lg:border-l lg:border-ov-border/60">
+          <div className="flex justify-center lg:col-span-12">
+            <div className="w-full max-w-lg text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
                 Contact Details
               </p>
@@ -175,29 +175,29 @@ export default function Contact() {
                 and long-term partnership with our clients.
               </p>
 
-              <div className="mt-10 space-y-8">
+              <div className="mt-6 space-y-8">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Email
                   </p>
                   <a
                     href="mailto:support@orivancegc.com"
-                    className="mt-1.5 block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
+                    className="mt-1.5 inline-block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
                   >
                     support@orivancegc.com
                   </a>
                 </div>
-                <div>
+                {/* <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Phone
                   </p>
                   <a
                     href="tel:+917219504950"
-                    className="mt-1.5 block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
+                    className="mt-1.5 inline-block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
                   >
                     +91 7219504950
                   </a>
-                </div>
+                </div> */}
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Business Hours
