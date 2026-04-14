@@ -1,32 +1,39 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
-import Button from '../components/Button'
+// import { useState, type ChangeEvent, type FormEvent } from 'react'
+// import Button from '../components/Button'
 import { CONTACT_PAGE_INTRO } from '../content/ovCopy'
 
-type ContactForm = {
-  name: string
-  email: string
-  company: string
-  message: string
-}
-
-const initial: ContactForm = { name: '', email: '', company: '', message: '' }
-
 export default function Contact() {
-  const [form, setForm] = useState<ContactForm>(initial)
-  const [submitted, setSubmitted] = useState(false)
+  // const [form, setForm] = useState<ContactForm>(initial)
+  // const [submitted, setSubmitted] = useState(false)
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target
-    setForm((f) => ({ ...f, [name]: value }))
-  }
+  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  //   const { name, value } = e.target
+  //   setForm((f) => ({ ...f, [name]: value }))
+  // }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+  // function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
+  //   setSubmitted(true)
+  // }
 
-  const inputCls =
-    'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
+  // const inputCls =
+  //   'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
+
+  // const [form, setForm] = useState<ContactForm>(initial)
+  // const [submitted, setSubmitted] = useState(false)
+
+  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  //   const { name, value } = e.target
+  //   setForm((f) => ({ ...f, [name]: value }))
+  // }
+
+  // function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
+  //   setSubmitted(true)
+  // }
+
+  // const inputCls =
+  //   'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
 
   return (
     <>
