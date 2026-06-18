@@ -3,6 +3,7 @@ import { CheckCircle2, AlertOctagon, Info } from 'lucide-react';
 import AdminLogin from './AdminLogin';
 import AdminLayout from './AdminLayout';
 import AdminBlogs from './AdminBlogs';
+import AdminNews from './AdminNews';
 
 interface Toast {
   id: number;
@@ -81,6 +82,10 @@ export default function AdminPortal() {
     <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab} handleLogout={handleLogout}>
       {activeTab === 'blogs' && (
         <AdminBlogs token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
+      )}
+
+      {activeTab === 'news' && (
+        <AdminNews token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
       )}
 
       {/* Floating Custom Toast Banners */}

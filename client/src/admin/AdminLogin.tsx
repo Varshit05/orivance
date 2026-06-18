@@ -20,7 +20,7 @@ export default function AdminLogin({ onLoginSuccess, showToast }: AdminLoginProp
 
     try {
       setLoading(true);
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

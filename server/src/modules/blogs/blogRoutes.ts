@@ -2,16 +2,24 @@ import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { requireAdmin } from '../middleware/authMiddleware.js';
+import { requireAdmin } from '../../middleware/authMiddleware.js';
 import {
   getBlogs,
   getBlogBySlugOrId,
   createBlog,
   updateBlog,
   deleteBlog,
-} from '../controllers/blogController.js';
+} from './blogController.js';
 
-const router = Router();
+const publicRouter = Router();
+publicRouter.get('/', getBlogs);
+publicRouter.get('/:identifier', getBlogBySlugOrId);
+
+const adminRouter = Router();
+adminRouter.get('/', requireAdmin, getBlogs);
+adminRouter.post('/', requireAdmin, createBlog);
+adminRouter.put('/:id', requireAdmin, updateBlog);
+adminRouter.delete('/:id', requireAdmin, deleteBlog);
 
 // Ensure upload directory exists
 const UPLOAD_DIR = './uploads';
@@ -47,15 +55,8 @@ const upload = multer({
   },
 });
 
-// Blog REST API routes
-router.get('/', getBlogs);
-router.get('/:identifier', getBlogBySlugOrId);
-router.post('/', requireAdmin, createBlog);
-router.put('/:id', requireAdmin, updateBlog);
-router.delete('/:id', requireAdmin, deleteBlog);
-
 // Blog Cover Image Upload route
-router.post('/upload', requireAdmin, (req, res) => {
+adminRouter.post('/upload', requireAdmin, (req, res) => {
   upload.single('image')(req, res, (err) => {
     if (err) {
       return res.status(400).json({ message: err.message });
@@ -69,4 +70,5 @@ router.post('/upload', requireAdmin, (req, res) => {
   });
 });
 
-export default router;
+export { publicRouter as publicBlogRouter, adminRouter as adminBlogRouter };
+

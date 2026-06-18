@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken, TokenPayload } from '../utils/auth.js';
+import { verifyToken, TokenPayload } from '../modules/auth/auth.js';
 
 export interface AuthenticatedRequest extends Request {
   admin?: TokenPayload;

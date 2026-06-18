@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, BookOpen, LogOut, Menu } from 'lucide-react';
+import { X, BookOpen, LogOut, Menu, Newspaper } from 'lucide-react';
 
 interface AdminLayoutProps {
   activeTab: string;
@@ -20,10 +20,10 @@ export default function AdminLayout({
 
   return (
     <div className="relative min-h-screen flex bg-slate-50 text-slate-800 font-sans">
-      
+
       {/* 1. SIDEBAR PANEL (Desktop fixed, Mobile toggleable) */}
       <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-[#0b1a2e] text-slate-300 flex flex-col justify-between border-r border-slate-800 transition-transform duration-300 md:translate-x-0 ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        
+
         {/* Brand/Logo header */}
         <div>
           <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800/80 bg-[#081322]">
@@ -31,9 +31,9 @@ export default function AdminLayout({
               <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm">O</div>
               <span className="text-base font-bold text-white tracking-wide">OriVance Admin</span>
             </div>
-            
+
             {/* Mobile Sidebar Close Button */}
-            <button 
+            <button
               onClick={() => setMobileSidebarOpen(false)}
               className="md:hidden p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
             >
@@ -48,14 +48,27 @@ export default function AdminLayout({
                 setActiveTab('blogs');
                 setMobileSidebarOpen(false);
               }}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                activeTab === 'blogs'
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'blogs'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'hover:bg-slate-800/60 hover:text-white'
-              }`}
+                }`}
             >
               <BookOpen className="w-5 h-5" />
               Blogs
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('news');
+                setMobileSidebarOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'news'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'hover:bg-slate-800/60 hover:text-white'
+                }`}
+            >
+              <Newspaper className="w-5 h-5" />
+              News & Updates
             </button>
           </nav>
         </div>
@@ -77,14 +90,14 @@ export default function AdminLayout({
             className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold border border-slate-700/80 text-slate-300 hover:bg-red-950/30 hover:border-red-900/50 hover:text-red-400 transition-colors"
           >
             <LogOut className="w-4 h-4" />
-            Secure Sign Out
+            Log Out
           </button>
         </div>
       </aside>
 
       {/* Backdrop overlay on mobile */}
       {mobileSidebarOpen && (
-        <div 
+        <div
           onClick={() => setMobileSidebarOpen(false)}
           className="fixed inset-0 z-30 bg-slate-900/50 backdrop-blur-xs md:hidden animate-fade-in"
         />
@@ -92,7 +105,7 @@ export default function AdminLayout({
 
       {/* 2. MAIN WORKING PANEL */}
       <div className="flex-1 min-h-screen md:pl-64 flex flex-col">
-        
+
         {/* Top Header bar */}
         <header className="h-16 border-b border-slate-200 bg-white flex items-center justify-between px-6 z-20 sticky top-0">
           <div className="flex items-center gap-3">

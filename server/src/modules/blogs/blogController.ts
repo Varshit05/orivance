@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Blog } from '../models/blogModel.js';
+import { Blog } from './blogModel.js';
 
 const calculateReadTime = (content: string): string => {
   const wordsPerMinute = 200;

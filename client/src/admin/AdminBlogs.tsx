@@ -72,7 +72,7 @@ export default function AdminBlogs({ token, showToast, handleAuthExpiry }: Admin
     if (!token) return;
     try {
       setLoading(true);
-      const response = await fetch('/api/blogs', {
+      const response = await fetch('/api/admin/blogs', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -197,7 +197,7 @@ export default function AdminBlogs({ token, showToast, handleAuthExpiry }: Admin
 
     try {
       setUploadingImage(true);
-      const response = await fetch('/api/blogs/upload', {
+      const response = await fetch('/api/admin/blogs/upload', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -249,7 +249,7 @@ export default function AdminBlogs({ token, showToast, handleAuthExpiry }: Admin
     };
 
     try {
-      const url = editingId ? `/api/blogs/${editingId}` : '/api/blogs';
+      const url = editingId ? `/api/admin/blogs/${editingId}` : '/api/admin/blogs';
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -284,7 +284,7 @@ export default function AdminBlogs({ token, showToast, handleAuthExpiry }: Admin
   const handleDelete = async (id: string) => {
     if (!token) return;
     try {
-      const response = await fetch(`/api/blogs/${id}`, {
+      const response = await fetch(`/api/admin/blogs/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

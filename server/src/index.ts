@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import blogRouter from './routes/blogRoutes.js';
-import authRouter from './routes/authRoutes.js';
-import { Admin } from './models/adminModel.js';
-import { generateSalt, hashPassword } from './utils/auth.js';
+import { publicBlogRouter, adminBlogRouter } from './modules/blogs/blogRoutes.js';
+import authRouter from './modules/auth/authRoutes.js';
+import { publicNewsRouter, adminNewsRouter } from './modules/news/newsRoutes.js';
+import { Admin } from './modules/auth/adminModel.js';
+import { generateSalt, hashPassword } from './modules/auth/auth.js';
 
 dotenv.config();
 
@@ -25,8 +26,14 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsPath = path.join(process.cwd(), 'uploads');
 app.use('/uploads', express.static(uploadsPath));
 
-app.use('/api/blogs', blogRouter);
-app.use('/api/auth', authRouter);
+// Public visitor routes
+app.use('/api/blogs', publicBlogRouter);
+app.use('/api/news', publicNewsRouter);
+
+// Admin gateway routes
+app.use('/api/admin/auth', authRouter);
+app.use('/api/admin/blogs', adminBlogRouter);
+app.use('/api/admin/news', adminNewsRouter);
 
 app.get('/api', (req, res) => {
   res.json({

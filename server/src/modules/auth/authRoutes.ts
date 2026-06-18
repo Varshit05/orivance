@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { Admin } from '../models/adminModel.js';
-import { hashPassword, createToken } from '../utils/auth.js';
+import { Admin } from './adminModel.js';
+import { hashPassword, createToken } from './auth.js';
 
 const router = Router();
 
