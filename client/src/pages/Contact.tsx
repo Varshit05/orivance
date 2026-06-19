@@ -1,39 +1,61 @@
-// import { useState, type ChangeEvent, type FormEvent } from 'react'
-// import Button from '../components/Button'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+import Button from '../components/Button'
 import { CONTACT_PAGE_INTRO } from '../content/ovCopy'
 
+interface ContactForm {
+  name: string
+  email: string
+  company: string
+  message: string
+}
+
+const initial: ContactForm = {
+  name: '',
+  email: '',
+  company: '',
+  message: '',
+}
+
 export default function Contact() {
-  // const [form, setForm] = useState<ContactForm>(initial)
-  // const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState<ContactForm>(initial)
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  //   const { name, value } = e.target
-  //   setForm((f) => ({ ...f, [name]: value }))
-  // }
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target
+    setForm((f) => ({ ...f, [name]: value }))
+  }
 
-  // function handleSubmit(e: FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
-  //   setSubmitted(true)
-  // }
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setSubmitting(true)
+    setError(null)
 
-  // const inputCls =
-  //   'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
+    try {
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
 
-  // const [form, setForm] = useState<ContactForm>(initial)
-  // const [submitted, setSubmitted] = useState(false)
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message || 'Something went wrong. Please try again.')
+      }
 
-  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  //   const { name, value } = e.target
-  //   setForm((f) => ({ ...f, [name]: value }))
-  // }
+      setSubmitted(true)
+    } catch (err: any) {
+      setError(err.message || 'Failed to send message. Please check your connection and try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
-  // function handleSubmit(e: FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
-  //   setSubmitted(true)
-  // }
-
-  // const inputCls =
-  //   'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
+  const inputCls =
+    'mt-2 w-full rounded-lg border border-ov-border bg-ov-muted/50 px-3 py-3 text-sm text-ov-navy transition-[border-color,background-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-ov-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-ov-blue/12'
 
   return (
     <>
@@ -62,19 +84,19 @@ export default function Contact() {
       {/* Form + details */}
       <section className="bg-ov-muted pt-6 pb-16 sm:pt-8 sm:pb-20">
         <div className="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-12 lg:gap-20 lg:px-8">
-          {/* <div className="lg:col-span-7">
+          <div className="lg:col-span-7">
             <div className="overflow-hidden rounded-2xl border border-ov-border/90 bg-white shadow-ov-lg ring-1 ring-ov-navy/4">
               <div
-                className="h-1 bg-linear-to-r from-ov-blue via-ov-blue-light to-ov-accent"
+                className="h-1 bg-gradient-to-r from-ov-blue via-ov-blue-light to-ov-accent"
                 aria-hidden
               />
               <div className="p-8 sm:p-10 lg:p-11">
                 {submitted ? (
                   <div className="py-2">
-                    <p className="font-display text-2xl text-ov-navy">
+                    <p className="font-display text-2xl text-ov-navy animate-fade-in">
                       Thank you for reaching out.
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-ov-slate">
+                    <p className="mt-3 text-sm leading-relaxed text-ov-slate animate-fade-in">
                       We have received your message and will respond within one
                       business day.
                     </p>
@@ -90,6 +112,13 @@ export default function Contact() {
                     <p className="mt-2 text-sm text-ov-slate">
                       We typically respond within 24 hours.
                     </p>
+                    
+                    {error && (
+                      <div className="mt-6 p-4 bg-red-50 border border-red-200 text-red-800 text-sm rounded-xl animate-fade-in">
+                        {error}
+                      </div>
+                    )}
+
                     <div className="mt-10 grid gap-6 sm:grid-cols-2 sm:gap-8">
                       <div className="sm:col-span-2">
                         <label
@@ -106,6 +135,7 @@ export default function Contact() {
                           value={form.name}
                           onChange={handleChange}
                           className={inputCls}
+                          disabled={submitting}
                         />
                       </div>
                       <div>
@@ -123,6 +153,7 @@ export default function Contact() {
                           value={form.email}
                           onChange={handleChange}
                           className={inputCls}
+                          disabled={submitting}
                         />
                       </div>
                       <div>
@@ -140,6 +171,7 @@ export default function Contact() {
                           value={form.company}
                           onChange={handleChange}
                           className={inputCls}
+                          disabled={submitting}
                         />
                       </div>
                       <div className="sm:col-span-2">
@@ -157,20 +189,23 @@ export default function Contact() {
                           value={form.message}
                           onChange={handleChange}
                           className={`${inputCls} resize-y`}
+                          disabled={submitting}
                         />
                       </div>
                     </div>
                     <div className="mt-10">
-                      <Button type="submit">Send Message</Button>
+                      <Button type="submit" disabled={submitting}>
+                        {submitting ? 'Sending Message...' : 'Send Message'}
+                      </Button>
                     </div>
                   </form>
                 )}
               </div>
             </div>
-          </div> */}
+          </div>
 
-          <div className="flex justify-center lg:col-span-12">
-            <div className="w-full max-w-lg text-center">
+          <div className="flex items-center lg:col-span-5">
+            <div className="w-full max-w-lg">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ov-blue">
                 Contact Details
               </p>
@@ -194,17 +229,6 @@ export default function Contact() {
                     support@orivancegc.com
                   </a>
                 </div>
-                {/* <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
-                    Phone
-                  </p>
-                  <a
-                    href="tel:+917219504950"
-                    className="mt-1.5 inline-block text-sm text-ov-navy transition-colors duration-200 hover:text-ov-blue"
-                  >
-                    +91 7219504950
-                  </a>
-                </div> */}
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ov-slate/50">
                     Business Hours
@@ -221,3 +245,4 @@ export default function Contact() {
     </>
   )
 }
+

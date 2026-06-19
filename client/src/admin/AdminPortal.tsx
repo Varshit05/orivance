@@ -4,6 +4,7 @@ import AdminLogin from './AdminLogin';
 import AdminLayout from './AdminLayout';
 import AdminBlogs from './AdminBlogs';
 import AdminNews from './AdminNews';
+import AdminContacts from './AdminContacts';
 
 interface Toast {
   id: number;
@@ -86,6 +87,10 @@ export default function AdminPortal() {
 
       {activeTab === 'news' && (
         <AdminNews token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
+      )}
+
+      {activeTab === 'contacts' && (
+        <AdminContacts token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
       )}
 
       {/* Floating Custom Toast Banners */}

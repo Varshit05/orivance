@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, BookOpen, LogOut, Menu, Newspaper } from 'lucide-react';
+import { X, BookOpen, LogOut, Menu, Newspaper, Mail } from 'lucide-react';
 
 interface AdminLayoutProps {
   activeTab: string;
@@ -69,6 +69,20 @@ export default function AdminLayout({
             >
               <Newspaper className="w-5 h-5" />
               News & Updates
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('contacts');
+                setMobileSidebarOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'contacts'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'hover:bg-slate-800/60 hover:text-white'
+                }`}
+            >
+              <Mail className="w-5 h-5" />
+              Contact Responses
             </button>
           </nav>
         </div>

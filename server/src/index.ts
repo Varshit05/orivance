@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { publicBlogRouter, adminBlogRouter } from './modules/blogs/blogRoutes.js';
 import authRouter from './modules/auth/authRoutes.js';
 import { publicNewsRouter, adminNewsRouter } from './modules/news/newsRoutes.js';
+import { publicContactRouter, adminContactRouter } from './modules/contacts/contactRoutes.js';
 import { Admin } from './modules/auth/adminModel.js';
 import { generateSalt, hashPassword } from './modules/auth/auth.js';
 
@@ -29,11 +30,13 @@ app.use('/uploads', express.static(uploadsPath));
 // Public visitor routes
 app.use('/api/blogs', publicBlogRouter);
 app.use('/api/news', publicNewsRouter);
+app.use('/api/contacts', publicContactRouter);
 
 // Admin gateway routes
 app.use('/api/admin/auth', authRouter);
 app.use('/api/admin/blogs', adminBlogRouter);
 app.use('/api/admin/news', adminNewsRouter);
+app.use('/api/admin/contacts', adminContactRouter);
 
 app.get('/api', (req, res) => {
   res.json({
