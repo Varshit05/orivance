@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle2, AlertOctagon, Info } from 'lucide-react';
 import AdminLogin from './AdminLogin';
 import AdminLayout from './AdminLayout';
@@ -16,6 +16,31 @@ export default function AdminPortal() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('admin_token'));
   const [activeTab, setActiveTab] = useState<string>('blogs');
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+
+  const fetchUnreadCount = async () => {
+    if (!token) return;
+    try {
+      const response = await fetch('/api/admin/contacts?status=unread', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUnreadCount(data.length);
+      }
+    } catch (err) {
+      // Fail silently for background updates
+    }
+  };
+
+  useEffect(() => {
+    if (!token) return;
+    fetchUnreadCount();
+    const interval = setInterval(fetchUnreadCount, 15000); // Poll every 15 seconds
+    return () => clearInterval(interval);
+  }, [token]);
 
   // Helper: Show custom toast message
   const showToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
@@ -80,7 +105,7 @@ export default function AdminPortal() {
   }
 
   return (
-    <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab} handleLogout={handleLogout}>
+    <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab} handleLogout={handleLogout} unreadCount={unreadCount}>
       {activeTab === 'blogs' && (
         <AdminBlogs token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
       )}
@@ -90,7 +115,12 @@ export default function AdminPortal() {
       )}
 
       {activeTab === 'contacts' && (
-        <AdminContacts token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
+        <AdminContacts
+          token={token}
+          showToast={showToast}
+          handleAuthExpiry={handleAuthExpiry}
+          refreshUnreadCount={fetchUnreadCount}
+        />
       )}
 
       {/* Floating Custom Toast Banners */}

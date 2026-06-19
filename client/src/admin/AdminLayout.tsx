@@ -6,6 +6,7 @@ interface AdminLayoutProps {
   setActiveTab: (tab: string) => void;
   handleLogout: () => void;
   children: React.ReactNode;
+  unreadCount?: number;
 }
 
 export default function AdminLayout({
@@ -13,6 +14,7 @@ export default function AdminLayout({
   setActiveTab,
   handleLogout,
   children,
+  unreadCount = 0,
 }: AdminLayoutProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -49,8 +51,8 @@ export default function AdminLayout({
                 setMobileSidebarOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'blogs'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'hover:bg-slate-800/60 hover:text-white'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'hover:bg-slate-800/60 hover:text-white'
                 }`}
             >
               <BookOpen className="w-5 h-5" />
@@ -63,8 +65,8 @@ export default function AdminLayout({
                 setMobileSidebarOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'news'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'hover:bg-slate-800/60 hover:text-white'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'hover:bg-slate-800/60 hover:text-white'
                 }`}
             >
               <Newspaper className="w-5 h-5" />
@@ -76,13 +78,20 @@ export default function AdminLayout({
                 setActiveTab('contacts');
                 setMobileSidebarOpen(false);
               }}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'contacts'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'hover:bg-slate-800/60 hover:text-white'
+              className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'contacts'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'hover:bg-slate-800/60 hover:text-white'
                 }`}
             >
-              <Mail className="w-5 h-5" />
-              Contact Responses
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5" />
+                Contact Responses
+              </div>
+              {unreadCount > 0 && (
+                <span className="flex h-5 min-w-5 px-1.5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                  {unreadCount}
+                </span>
+              )}
             </button>
           </nav>
         </div>

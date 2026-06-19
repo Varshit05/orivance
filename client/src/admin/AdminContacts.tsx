@@ -32,9 +32,15 @@ interface AdminContactsProps {
   token: string;
   showToast: (message: string, type: 'success' | 'error' | 'info') => void;
   handleAuthExpiry: () => void;
+  refreshUnreadCount?: () => void;
 }
 
-export default function AdminContacts({ token, showToast, handleAuthExpiry }: AdminContactsProps) {
+export default function AdminContacts({
+  token,
+  showToast,
+  handleAuthExpiry,
+  refreshUnreadCount,
+}: AdminContactsProps) {
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -61,6 +67,7 @@ export default function AdminContacts({ token, showToast, handleAuthExpiry }: Ad
       if (response.ok) {
         const data = await response.json();
         setContacts(data);
+        refreshUnreadCount?.();
       } else {
         showToast('Failed to fetch contact messages', 'error');
       }
@@ -100,6 +107,7 @@ export default function AdminContacts({ token, showToast, handleAuthExpiry }: Ad
           setSelectedContact(updated);
         }
         showToast(`Status updated to ${newStatus}`, 'success');
+        refreshUnreadCount?.();
       } else {
         showToast('Failed to update status', 'error');
       }
@@ -131,6 +139,7 @@ export default function AdminContacts({ token, showToast, handleAuthExpiry }: Ad
         }
         setShowDeleteConfirm(null);
         showToast('Contact message deleted successfully', 'success');
+        refreshUnreadCount?.();
       } else {
         showToast('Failed to delete message', 'error');
       }
@@ -195,30 +204,6 @@ export default function AdminContacts({ token, showToast, handleAuthExpiry }: Ad
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           Refresh
         </button>
-      </div>
-
-      {/* Stats row */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Inbox</p>
-          <p className="text-2xl font-bold text-slate-900 mt-1">{totalCount}</p>
-        </div>
-        <div className="bg-white p-4 rounded-xl border border-blue-100 shadow-xs bg-blue-50/20">
-          <p className="text-xs font-semibold text-blue-500 uppercase tracking-wider">Unread</p>
-          <p className="text-2xl font-bold text-blue-700 mt-1">{unreadCount}</p>
-        </div>
-        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Read</p>
-          <p className="text-2xl font-bold text-slate-700 mt-1">{readCount}</p>
-        </div>
-        <div className="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs bg-emerald-50/20">
-          <p className="text-xs font-semibold text-emerald-500 uppercase tracking-wider">Replied</p>
-          <p className="text-2xl font-bold text-emerald-700 mt-1">{repliedCount}</p>
-        </div>
-        <div className="bg-white p-4 rounded-xl border border-amber-100 shadow-xs bg-amber-50/20 col-span-2 md:col-span-1">
-          <p className="text-xs font-semibold text-amber-600 uppercase tracking-wider">Archived</p>
-          <p className="text-2xl font-bold text-amber-700 mt-1">{archivedCount}</p>
-        </div>
       </div>
 
       {/* Filter Tabs & Search Box */}
