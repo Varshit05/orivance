@@ -16,6 +16,9 @@ build/
 uploads/*
 !uploads/.gitkeep
 
+# Local scripts
+src/scripts/*
+
 # Logs
 logs
 *.log

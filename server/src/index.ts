@@ -8,6 +8,7 @@ import { publicBlogRouter, adminBlogRouter } from './modules/blogs/blogRoutes.js
 import authRouter from './modules/auth/authRoutes.js';
 import { publicNewsRouter, adminNewsRouter } from './modules/news/newsRoutes.js';
 import { publicContactRouter, adminContactRouter } from './modules/contacts/contactRoutes.js';
+import { publicCaseStudyRouter, adminCaseStudyRouter } from './modules/caseStudies/caseStudyRoutes.js';
 import { Admin } from './modules/auth/adminModel.js';
 import { generateSalt, hashPassword } from './modules/auth/auth.js';
 
@@ -31,12 +32,14 @@ app.use('/uploads', express.static(uploadsPath));
 app.use('/api/blogs', publicBlogRouter);
 app.use('/api/news', publicNewsRouter);
 app.use('/api/contacts', publicContactRouter);
+app.use('/api/case-studies', publicCaseStudyRouter);
 
 // Admin gateway routes
 app.use('/api/admin/auth', authRouter);
 app.use('/api/admin/blogs', adminBlogRouter);
 app.use('/api/admin/news', adminNewsRouter);
 app.use('/api/admin/contacts', adminContactRouter);
+app.use('/api/admin/case-studies', adminCaseStudyRouter);
 
 app.get('/api', (req, res) => {
   res.json({

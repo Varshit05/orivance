@@ -5,6 +5,7 @@ import AdminLayout from './AdminLayout';
 import AdminBlogs from './AdminBlogs';
 import AdminNews from './AdminNews';
 import AdminContacts from './AdminContacts';
+import AdminCaseStudies from './AdminCaseStudies';
 
 interface Toast {
   id: number;
@@ -112,6 +113,10 @@ export default function AdminPortal() {
 
       {activeTab === 'news' && (
         <AdminNews token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
+      )}
+
+      {activeTab === 'caseStudies' && (
+        <AdminCaseStudies token={token} showToast={showToast} handleAuthExpiry={handleAuthExpiry} />
       )}
 
       {activeTab === 'contacts' && (
